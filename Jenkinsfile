@@ -3,6 +3,7 @@ pipeline {
     environment {
 	registry = "juht/calculator"
         registryCredential = 'dockerhub'
+ 	dockerImage = ''
     }
     stages {
         stage ('Chekc out'){
@@ -48,7 +49,9 @@ pipeline {
         }
         stage ('Docker Build') {
             steps {
-                sh "docker build -t juht/calculator ."
+		script {
+		    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+		}
             }
         }
 	stage('Deploy Image') {
