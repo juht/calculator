@@ -47,7 +47,7 @@ pipeline {
         }
         stage ('Docker Build') {
             steps {
-                sh "docker build juht/calculator ."
+                sh "docker build -t juht/calculator ."
             }
         }
     }
