@@ -1,7 +1,8 @@
 pipeline {
     agent any
-    triggers{
-        pollSCM('* * * * *')
+    environment {
+	registry = "juht/calculator"
+        registryCredential = 'dockerhub'
     }
     stages {
         stage ('Chekc out'){
@@ -50,5 +51,14 @@ pipeline {
                 sh "docker build -t juht/calculator ."
             }
         }
+	stage('Deploy Image') {
+	    steps {
+		script {
+		    docker.withRegistry('',registryCredential ) {
+		        dockerImage.push()
+		    }
+		}
+	    }
+    	}
     }
 }
