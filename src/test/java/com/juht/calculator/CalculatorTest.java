@@ -2,6 +2,11 @@ package com.juht.calculator;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
+/** 
+  * This is JavaDoc
+  *
+  */
+
 public class CalculatorTest {
 	private Calculator calculator = new Calculator();
 
