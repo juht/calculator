@@ -63,5 +63,10 @@ pipeline {
 		}
 	    }
     	}
+	stage('Deploy to Staging'){
+	    steps {
+		sh "docker run -d --rm -p 8090:8090 ${dockerImage.imageName()}"
+	    }
+        }
     }
 }
