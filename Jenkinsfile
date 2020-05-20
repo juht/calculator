@@ -68,9 +68,10 @@ pipeline {
 		script {
 		    docker.withServer('tcp://docker:2376',''){
 			dockerImage.withRun('-p 8090:8090') {
-			     sh 'curl -X GET http://docker:8090/sum?a=1\\&b=3; echo xxx'
-			     sh 'curl -X GET http://localhost:8090/sum?a=1\\&b=3; echo yyy'
-			     sh 'curl -X GET http://172.18.0.2:8090/sum?a=1\\&b=3; echo zzz'
+			     sleep 10
+			     sh 'curl -X GET http://docker:8090/sum?a=1\\&b=3 || echo xxx'
+			     sh 'curl -X GET http://localhost:8090/sum?a=1\\&b=3 || echo yyy'
+			     sh 'curl -X GET http://172.18.0.2:8090/sum?a=1\\&b=3 || echo zzz'
 			}
 		    }
 		}
