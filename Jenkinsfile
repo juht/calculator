@@ -66,7 +66,7 @@ pipeline {
 	stage('Deploy to Staging'){
 	    agent {
 		docker { 
-			image("dockerImage.imageName()") 
+			image("${dockerImage.imageName()}") 
 			args("-d --rm -p 8090:8090") 
 		}
 	    }
