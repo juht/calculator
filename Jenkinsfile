@@ -70,9 +70,9 @@ pipeline {
 			args("-d --rm -p 8090:8090") 
 		}
 	    }
-#	    steps {
-#		sh "echo Blue"
-#	    }
+//	    steps {
+//		sh "echo Blue"
+//	    }
         }
     }
 }
