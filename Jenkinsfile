@@ -70,9 +70,9 @@ pipeline {
 			args("-d --rm -p 8090:8090") 
 		}
 	    }
-	    steps {
-		sh "curl -X GET http://docker:8090/sum?a=1&b=2"
-	    }
+#	    steps {
+#		sh "echo Blue"
+#	    }
         }
     }
 }
