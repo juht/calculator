@@ -64,6 +64,7 @@ pipeline {
 	    }
     	}
 	stage('Deploy to Staging'){
+	    agent docker
 	    steps {
 		sh "docker run -d --rm -p 8090:8090 ${dockerImage.imageName()}"
 	    }
