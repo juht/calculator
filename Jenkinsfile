@@ -65,10 +65,10 @@ pipeline {
     	}
 	stage('Deploy to Staging'){
 	    agent {
-		docker any
+		docker { image("dockerImage.imageName()").withRun("-d --rm -p 8090:8090") }
 	    }
 	    steps {
-		sh "docker run -d --rm -p 8090:8090 ${dockerImage.imageName()}"
+		sh "curl -X GET http://docker:8090/sum?a=1&b=2"
 	    }
         }
     }
