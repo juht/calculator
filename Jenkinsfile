@@ -75,5 +75,11 @@ pipeline {
 		}
 	    }
         }
+	stage('Acceptance Test') {
+	    steps {
+		sleep 10
+		sh './acceptance_test.bash'
+	    }	
+        }
     }
 }
