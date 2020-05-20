@@ -6,7 +6,7 @@ pipeline {
  	dockerImage = ''
     }
     stages {
-        stage ('Chekc out'){
+        stage ('Check out'){
             steps {
                git url: 'https://github.com/juht/calculator.git'
             }
@@ -64,14 +64,14 @@ pipeline {
 	    }
     	}
 	stage('Deploy to Staging'){
-	    agent {
-		docker { 
-			image("juht/calculator:13") 
-			args("-d --rm -p 8090:8090") 
-		}
-	    }
 	    steps {
-		sh "echo Blue"
+		script {
+		    docker.withServer('tpc://docker:2376',''){
+			dockerImage.withRun('--rm -p 8090:8090') {
+			     sh "echo Blue"
+			}
+		    }
+		}
 	    }
         }
     }
