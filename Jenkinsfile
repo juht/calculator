@@ -67,7 +67,7 @@ pipeline {
 	    agent {
 		docker { 
 			image("${dockerImage.imageName()}") 
-			args("-d --rm -p 8090:8090") 
+			// args("-d --rm -p 8090:8090") 
 		}
 	    }
 	    steps {
