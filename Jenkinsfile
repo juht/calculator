@@ -66,7 +66,7 @@ pipeline {
 	stage('Deploy to Staging'){
 	    steps {
 		script {
-		    docker.withServer('tpc://docker:2376',''){
+		    docker.withServer('tcp://docker:2376',''){
 			dockerImage.withRun('--rm -p 8090:8090') {
 			     sh "echo Blue"
 			}
