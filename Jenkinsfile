@@ -67,7 +67,7 @@ pipeline {
        stage('Deploy to staging'){
 	   steps {
 		script {
-		    docker.withServer('tpc://docker:2376','') {
+		    docker.withServer('tcp://docker:2376','') {
 			dockerImage.withRun("-p 8090:8090") {
 			    sleep 10
 			    sh './acceptance_test.bash'
