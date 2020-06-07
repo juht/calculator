@@ -64,5 +64,17 @@ pipeline {
                 }
            }
        }
+       stage('Deploy to staging'){
+	   steps {
+		script {
+		    docker.withServer('tpc://docker:2376','') {
+			dockerImage.run("-p 8090:8090") {
+			    sleep 10
+			    sh 'curl -X GET http://docker:8090/sum?a=2\\&b=3'
+			}
+		    }
+                }
+           }
+       }
     }
 }
