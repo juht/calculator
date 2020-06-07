@@ -1,0 +1,46 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  become: true
+  become_user: juht
+  tasks:
+
+    - name: Pull calculator Docker image
+      docker_image:
+        name: "juht/calculator"
+        source: pull
+
+    - name: Pull reverse proxy Docker image
+      docker_image:
+        name: "reverse-proxy"
+        source: pull
+
+    # Create docker network for calculator
+    - name: Create a network
+      docker_network:
+        name: calnet
+
+    # Creates the number of containers for calculator service
+    - name: Create calculator containers
+      docker_container:
+        name: "calculator{{ item }}"
+        image: "juht/calculator"
+        state: started
+        networks:
+          - name: calnet
+            aliases:
+              - "calculator{{ item }}"
+        exposed_ports:
+          - 8090
+      with_sequence: count=2
+
+    - name: Create reverse proxy containers
+      docker_container:
+        name: "reverseproxy"
+        image: "reverse-proxy"
+        state: started
+        networks:
+          - name: calnet
+        ports:
+          - "8090:8090"
+
